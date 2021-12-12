@@ -34,4 +34,4 @@ lerna-debug.log*
 .env
 
 # archivos planos
-credencialesbd.txt
+*.txt
