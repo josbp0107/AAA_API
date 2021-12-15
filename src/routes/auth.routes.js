@@ -1,8 +1,15 @@
-import {Router} from 'express' // Importar el enrutador de express
-const routes = Router()
+import {Router} from 'express' 
+const router = Router()
 
-router.post('/signin')
-router.post('/signup')
+import * as authController from '../controllers/auth.controller.js'
+import { verifySignup } from '../middlewares/index.js'
+
+router.post(
+    '/registrarse',
+    [verifySignup.checkDuplicateUsernameOrEmail],
+    authController.registrarse)
+
+router.post('/login', authController.login)
 
 
-export default routes;
+export default router;

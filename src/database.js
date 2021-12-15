@@ -1,8 +1,9 @@
 import mongoose from 'mongoose'
+import config from './config.js'
 
-mongoose.connect("mongodb://localhost/aaadb", {
+mongoose.connect(config.DATABASE, {
     useNewUrlParser: true,
-    useUnifiedTopology: true 
+    useUnifiedTopology: true,
 })
     .then(db => console.log("Db is connected"))
     .catch(error => console.log(error))

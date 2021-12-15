@@ -2,15 +2,17 @@ import {Router} from 'express'
 const router = Router()
 
 import * as subsidiosController from '../controllers/subsidios.controller.js'
+import {authJwt} from '../middlewares/index.js'
 
-router.post('/', subsidiosController.crearSubsidio)
 
-router.get('/', subsidiosController.obtenerSubsidio)
+router.post('/', [authJwt.verifyToken, authJwt.esUsuarioInternoOAdmin], subsidiosController.crearSubsidio)
 
-router.get('/:subsidioId', subsidiosController.obtenerSubsidioPorId)
+router.get('/', authJwt.verifyToken, subsidiosController.obtenerSubsidio)
 
-router.put('/:subsidioId', subsidiosController.actualizarSubsidio)
+router.get('/:subsidioId', [authJwt.verifyToken, authJwt.esUsuarioInternoOAdmin], subsidiosController.obtenerSubsidioPorId)
 
-router.delete('/:subsidioId', subsidiosController.eliminarSubsidioPorId)
+router.put('/:subsidioId', [authJwt.verifyToken, authJwt.esUsuarioInternoOAdmin],  subsidiosController.actualizarSubsidio)
+
+router.delete('/:subsidioId', [authJwt.verifyToken, authJwt.esUsuarioInternoOAdmin], subsidiosController.eliminarSubsidioPorId)
 
 export default router;

@@ -1,7 +1,6 @@
 import Subsidios from "../models/Subsidios.js";
 
 export const crearSubsidio = async (req, res) => {
-    /*console.log(req.body)*/
 
     const {nombre,
         valorEstratoUno,
